@@ -79,6 +79,8 @@ class RankNet(NNfuncs.NN):
         y_score = y_score.ravel()
         y_true_sorted = sorted(y_true, reverse=True)
         ideal_dcg = 0
+        # print('>>>>> %d'%k)
+        # print('>>>>> %d'%len(y_true_sorted))
         for i in range(k):
             ideal_dcg += (2 ** y_true_sorted[i] - 1.) / np.log2(i + 2)
         dcg = 0
@@ -118,10 +120,14 @@ class RankNet(NNfuncs.NN):
         if self.resumemodelName is None:
             self.initializeModel(Model, train_X, n_units1, n_units2, optimizerAlgorithm)
         
+        # self.optimizer.lr = 0.001
+        # print("LR = %f"%self.optimizer.lr)
         self.trainModel(train_X, train_y, validate_X, validate_y, n_iter)
 
         plot_result.acc(self.train_loss, self.test_loss, savename=savefigName)
         self.saveModels(savemodelName)
+
+        return self.train_loss, self.test_loss
 
 
 

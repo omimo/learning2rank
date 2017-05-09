@@ -19,6 +19,7 @@ def acc(train_acc, test_acc, savename='result_acc.pdf'):
     plt.ylabel("accuracy")
     plt.legend(loc='lower right')
     plt.savefig(savename)
+    plt.close()
     
 
     
@@ -33,6 +34,7 @@ def loss(train_loss, test_loss, savename='result_loss.pdf'):
 
     plt.legend(loc='upper right')
     plt.savefig(savename)
+    plt.close()
     
     
     
